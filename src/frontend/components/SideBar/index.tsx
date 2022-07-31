@@ -33,6 +33,11 @@ const SideBar = () => {
       icon: <></>,
       path: "/register",
     },
+    {
+      title: "Update",
+      icon: <></>,
+      path: "/update",
+    },
   ];
 
   return (

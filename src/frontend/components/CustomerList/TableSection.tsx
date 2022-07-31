@@ -41,6 +41,10 @@ const TableSection = () => {
       accessor: "name",
     },
     {
+      Header: "Address",
+      accessor: "address",
+    },
+    {
       Header: "Birthday",
       accessor: "dayOfBirth",
     },

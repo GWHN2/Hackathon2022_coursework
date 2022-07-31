@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { create } from "ipfs-http-client";
+import TextInput from "../common/TextInput";
+import Button from "../common/Button";
 
 const options = {
   url: "https://ipfs.infura.io:5001/api/v0",
@@ -8,6 +10,8 @@ const client = create(options);
 
 const UploadingFilesToIPFS = () => {
   const [fileUrl, updateFileUrl] = useState("");
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
 
   const onChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     try {
@@ -21,18 +25,30 @@ const UploadingFilesToIPFS = () => {
       console.log("Error uploading file: ", error);
     }
   };
-  console.log(fileUrl);
+
+  const onSubmit = async () => {
+    try {
+    } catch (error) {}
+  };
 
   return (
     <div className="">
-      <h1>IPFS Example</h1>
       <input
         type="file"
         onChange={(e) => {
           onChange(e);
         }}
       />
-      {fileUrl && <img src={fileUrl} width="600px" />}
+      {fileUrl && <img src={fileUrl} width="300px" />}
+      <div className="flex flex-col my-10 space-y-3">
+        <TextInput value={name} onchange={setName} placeholder="Name" />
+        <TextInput
+          value={description}
+          onchange={setDescription}
+          placeholder="Description"
+        />
+        <Button onClick={onSubmit}>Submit</Button>
+      </div>
     </div>
   );
 };

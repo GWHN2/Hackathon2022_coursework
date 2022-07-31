@@ -1,6 +1,6 @@
 import React from "react";
 
-const Title = ({
+const Titles = ({
   title,
   className,
 }: {
@@ -14,4 +14,4 @@ const Title = ({
   );
 };
 
-export default Title;
+export default Titles;

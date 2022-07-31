@@ -1,24 +1,17 @@
-import { useRef } from 'react';
-
-type TextInputProps = {
-  placeholder: string,
-  onChange: React.ChangeEventHandler<HTMLInputElement>
+interface TextInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+  onchange: (text: string) => void;
 }
 
-const TextInput = ({
-  placeholder = '',
-  onChange
-}: TextInputProps) => {
-
+const TextInput = ({ onchange, ...props }: TextInputProps) => {
   return (
-    <div
-      className={`inline-block border transition duration-150 ease-in-out focus-within:border-primary border-gray-gray4 mr-6`}
-    >
+    <div className={`gradient-background p-1 rounded-xl`}>
       <input
         type="text"
-        className='w-full px-2 pb-1.5 text-primary outline-none text-base font-light rounded-md inline-block'
-        placeholder={placeholder}
-        onChange={onChange}
+        className="w-full p-1 rounded-lg"
+        {...props}
+        onChange={(e) => {
+          onchange(e.target.value);
+        }}
       />
     </div>
   );

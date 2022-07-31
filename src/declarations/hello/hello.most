@@ -1,4 +1,31 @@
 // Version: 1.0.0
+type AssocList<K, V> = List<(K, V)>;
+type AssocList__1<K, V> = AssocList<K, V>;
+type Branch<K, V> = {left : Trie<K, V>; right : Trie<K, V>; size : Nat};
+type Customer__1 =
+  {address : Text; birthday : Text; name : Text; phone : Text; sex : Bool};
+type Hash = Nat32;
+type Key<K> = {hash : Hash; key : K};
+type Leaf<K, V> = {keyvals : AssocList__1<Key<K>, V>; size : Nat};
+type List<T> = ?(T, List<T>);
+type TokenId = Nat;
+type Trie<K, V> = {#branch : Branch<K, V>; #empty; #leaf : Leaf<K, V>};
+type metadata = {description : Text; name : Text; url : Text};
 actor {
-  
+  stable var TokenCounter : Nat;
+  stable var addressApproveAllTmp : [(Principal, [Principal])];
+  stable var balancesTmp : [(Principal, Nat)];
+  stable var customers :
+    {
+      #branch : Branch<Nat, Customer__1>;
+      #empty;
+      #leaf : Leaf<Nat, Customer__1>
+    };
+  stable var name : Text;
+  stable var next : Nat;
+  stable var owner : Principal;
+  stable var symbol : Text;
+  stable var tokenIdToApproveTmp : [(TokenId, Principal)];
+  stable var tokenIdToMetadataTmp : [(TokenId, metadata)];
+  stable var tokenIdToOwnerTmp : [(TokenId, Principal)]
 };

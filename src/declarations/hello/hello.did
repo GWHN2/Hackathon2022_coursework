@@ -1,3 +1,58 @@
-service : {
-  greet: (text) -> (text) query;
-}
+type metadata = 
+ record {
+   description: text;
+   name: text;
+   url: text;
+ };
+type TxReceipt = 
+ variant {
+   Err: ApiError;
+   Ok: bool;
+ };
+type TokenId = nat;
+type MintResult = 
+ variant {
+   Err: ApiError;
+   Ok: nat;
+ };
+type Dip721 = 
+ service {
+   approve: (TokenId, principal) -> ();
+   balanceOf: (principal) -> (BalanceResult) query;
+   create_account: (Customer) -> (bool);
+   delete_account: (nat) -> (bool);
+   getApproved: (TokenId) -> (principal) query;
+   getName: () -> (text) query;
+   getOwnerCanister: () -> (principal) query;
+   getSymbol: () -> (text) query;
+   getTokenInfo: (TokenId) -> (opt metadata) query;
+   isApprovedForAll: (principal, principal) -> (bool) query;
+   mint: (metadata) -> (MintResult);
+   ownerOf: (TokenId) -> (opt principal) query;
+   read_account: (nat) -> (opt Customer);
+   setApprovalForAll: (principal, bool) -> ();
+   transfer: (TokenId, principal) -> (TxReceipt);
+   transferFrom: (principal, principal, nat) -> ();
+   update_account: (nat, Customer) -> (bool);
+ };
+type Customer = 
+ record {
+   address: text;
+   birthday: text;
+   name: text;
+   phone: text;
+   sex: bool;
+ };
+type BalanceResult = 
+ variant {
+   Err: ApiError;
+   Ok: nat;
+ };
+type ApiError = 
+ variant {
+   InvalidAddress;
+   InvalidTokenId;
+   Other;
+   Unauthorized;
+ };
+service : (principal) -> Dip721

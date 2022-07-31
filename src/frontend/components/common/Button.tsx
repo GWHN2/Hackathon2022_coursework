@@ -12,7 +12,7 @@ const Button = ({
 }: IButtonProps) => {
   return (
     <div
-      className={`px-2 py-2 rounded-lg gradient-background my-5 ${layoutClassName}`}
+      className={`px-2 py-2 rounded-lg gradient-background my-5  flex items-center justify-center ${layoutClassName}`}
     >
       <button className={`text-white font-semibold ${className}`} {...props}>
         {children}

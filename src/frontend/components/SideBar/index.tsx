@@ -1,6 +1,8 @@
 import {
   CubeIcon,
   CubeTransparentIcon,
+  PhotographIcon,
+  PlusCircleIcon,
   TableIcon,
 } from "@heroicons/react/outline";
 import { HomeIcon, InformationCircleIcon } from "@heroicons/react/solid";
@@ -15,6 +17,16 @@ const SideBar = () => {
       title: "Customer",
       icon: <TableIcon />,
       path: "/customer-list",
+    },
+    {
+      title: "NFT",
+      icon: <PhotographIcon />,
+      path: "/my-nft",
+    },
+    {
+      title: "Create NFT",
+      icon: <PlusCircleIcon />,
+      path: "/create-nft",
     },
   ];
 
@@ -36,7 +48,6 @@ const SideBar = () => {
                 icon={item.icon}
                 title={item.title}
                 path={item.path}
-                isClose={index === 0 || index === 3}
               />
             </div>
           ))}

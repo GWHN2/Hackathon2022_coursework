@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "../frontend/components/common/Button";
 import TextInput from "../frontend/components/common/TextInput";
 import { makeHelloActor } from "../frontend/service/actor-locator";

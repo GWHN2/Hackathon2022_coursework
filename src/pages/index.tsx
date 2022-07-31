@@ -8,12 +8,12 @@ function HomePage() {
       <Head>
         <title>Internet Computer</title>
       </Head>
-      <main className="container h-screen w-screen mx-auto flex flex-col items-center justify-center">
+      <main className="container flex flex-col items-center justify-center">
         <h3 className="text-xl font-semibold">
           Next.js Internet Computer Starter Template!
         </h3>
 
-        <div className="relative w-72 lg:w-96 h-40">
+        <div className="relative h-40 w-72 lg:w-96">
           <Image src={logo} alt="logo" layout="fill" objectFit="contain" />
         </div>
 

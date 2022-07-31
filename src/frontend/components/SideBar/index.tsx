@@ -29,6 +29,11 @@ const SideBar = () => {
       path: "/create-nft",
     },
     {
+      title: "Send NFT",
+      icon: <></>,
+      path: "/send-nft",
+    },
+    {
       title: "Register",
       icon: <></>,
       path: "/register",
@@ -37,11 +42,6 @@ const SideBar = () => {
       title: "Update",
       icon: <></>,
       path: "/update",
-    },
-    {
-      title: "Send NFT",
-      icon: <></>,
-      path: "/send-nft",
     },
   ];
 

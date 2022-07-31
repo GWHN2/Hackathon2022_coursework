@@ -38,6 +38,11 @@ const SideBar = () => {
       icon: <></>,
       path: "/update",
     },
+    {
+      title: "Send NFT",
+      icon: <></>,
+      path: "/send-nft",
+    },
   ];
 
   return (

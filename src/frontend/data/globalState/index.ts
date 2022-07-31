@@ -14,3 +14,15 @@ export const SessionDataState = atom({
   key: "SessionDataState",
   default: {} as SessionData,
 });
+
+export const CountIDState = atom({
+  key: "CountIDState",
+  default: 0,
+  effects_UNSTABLE: [persistAtom],
+});
+
+export const DataState = atom({
+  key: "DataState",
+  default: [] as any[],
+  effects_UNSTABLE: [persistAtom],
+});

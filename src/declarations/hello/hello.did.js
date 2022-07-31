@@ -46,4 +46,4 @@ export const idlFactory = ({ IDL }) => {
   });
   return Dip721;
 };
-export const init = ({ IDL }) => { return [IDL.Principal]; };
+export const init = ({ IDL }) => { return []; };

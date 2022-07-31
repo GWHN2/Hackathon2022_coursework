@@ -55,4 +55,4 @@ type ApiError =
    Other;
    Unauthorized;
  };
-service : (principal) -> Dip721
+service : () -> Dip721

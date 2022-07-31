@@ -1,16 +1,20 @@
+import { count } from "console";
 import { useState } from "react";
+import { useRecoilState } from "recoil";
 import Button from "../frontend/components/common/Button";
 import TextInput from "../frontend/components/common/TextInput";
+import { CountIDState } from "../frontend/data/globalState";
 import { makeHelloActor } from "../frontend/service/actor-locator";
 
 function RegisterPage() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [sex, setSex] = useState("");
+  const [sex, setSex] = useState(false);
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
   const helloActor = makeHelloActor();
   const [dateOfBirth, setDateOfBirth] = useState("");
+  const [CountID, setCountID] = useRecoilState(CountIDState);
 
   const onFirstNameChange = (e: string) => {
     setFirstName(e);
@@ -18,10 +22,6 @@ function RegisterPage() {
 
   const onLastNameChange = (e: string) => {
     setLastName(e);
-  };
-
-  const onSexChange = (e: string) => {
-    setSex(e);
   };
 
   const onPhoneChange = (e: string) => {
@@ -35,9 +35,15 @@ function RegisterPage() {
   const onSave = async () => {
     const data = {
       name: `${firstName} ${lastName}`,
-      birthday: "",
+      birthday: dateOfBirth,
+      phone: phone,
+      address: address,
+      sex: sex,
     };
     const result = await helloActor.create_account(data);
+    if (result) {
+      setCountID(CountID + 1);
+    }
   };
 
   const onCancel = () => {};
@@ -65,6 +71,7 @@ function RegisterPage() {
               type="radio"
               name="flexRadioDefault"
               id="flexRadioDefault1"
+              checked={sex}
             />
             <label className="inline-block text-gray-800 form-check-label">
               Male
@@ -76,7 +83,10 @@ function RegisterPage() {
               type="radio"
               name="flexRadioDefault"
               id="flexRadioDefault2"
-              checked
+              checked={sex}
+              onChange={(e) => {
+                setSex(e.target.checked);
+              }}
             />
             <label className="inline-block text-gray-800 form-check-label">
               Female

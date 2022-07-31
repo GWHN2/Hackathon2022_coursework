@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Table from "./Table";
 import CellLayout from "./CellLayout";
+import { makeHelloActor } from "../../service/actor-locator";
+import { useRecoilState } from "recoil";
+import { CountIDState, DataState } from "../../data/globalState";
 
 const getDescription = (str: any) => {
   var result = str;
@@ -11,25 +14,35 @@ const getDescription = (str: any) => {
 };
 
 const TableSection = () => {
-  const [data, setData] = useState<any[]>([]);
+  const [data, setData] = useRecoilState<any[]>(DataState);
   const [loaded, setLoaded] = useState(false);
+  const helloActor = makeHelloActor();
+  const [CountID, setCountID] = useRecoilState<number>(CountIDState);
 
   useEffect(() => {
-    setLoaded(false);
-    const _data = data;
-    const sampleData = {
-      name: "sampleData",
-      dayOfBirth: "5/5/2020",
-      phone: "123456789",
-      sex: "male",
-    };
+    (async () => {
+      setLoaded(false);
+      var data0 = [];
 
-    const mappedData = [0, 1, 2, 3, 4].map((data) => {
-      return { ...sampleData, Id: data };
-    });
-    setData(mappedData);
-    setLoaded(true);
+      for (var i = 0; i <= CountID; i++) {
+        const _data = await helloActor.read_account(i);
+        if (_data.length > 0) {
+          const data2 = _data[0];
+          data0[i] = {
+            Id: i,
+            name: data2.name,
+            birthday: data2.birthday,
+            phone: data2.phone,
+            address: data2.address,
+            sex: data2.sex ? "Male" : "Female",
+          };
+        }
+      }
+      setData(data0);
+      setLoaded(true);
+    })();
   }, []);
+  console.log(data);
 
   const columns = [
     {
@@ -58,7 +71,7 @@ const TableSection = () => {
     },
     {
       Header: "",
-      accessor: "action",
+      accessor: "id",
       Cell: CellLayout,
     },
   ];

@@ -13,8 +13,9 @@ import Time "mo:base/Time";
 import Prelude "mo:base/Prelude";
 import TrieSet "mo:base/TrieSet";
 import Buffer "mo:base/Buffer";
-shared(msg) actor class Dip721(_owner: Principal) = this{
-  private stable var owner : Principal = _owner;
+shared(msg) actor class Dip721() = this{
+  // private stable var owner : Principal = _owner;
+    private stable var owner: Principal = Principal.fromText("2rhlo-33g5s-ivdiz-fx452-4hlp7-bpgzy-jl2p5-kyuai-ezpfb-shsm7-oae");
   private stable var name: Text =  "MyDIP721";
 private stable var symbol: Text = "MDIP";
   public type Customer = {

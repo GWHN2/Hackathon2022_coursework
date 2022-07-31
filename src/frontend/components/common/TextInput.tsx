@@ -12,7 +12,7 @@ const TextInput = ({
 
   return (
     <div
-      className={`inline-block border transition duration-150 ease-in-out focus-within:border-primary border-gray-gray4 mr-6`}
+      className={`inline-block border transition duration-150 ease-in-out focus-within:border-primary border-gray-gray4 mr-6 ml-6`}
     >
       <input
         type="text"

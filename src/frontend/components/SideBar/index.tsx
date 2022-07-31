@@ -1,4 +1,8 @@
-import { CubeIcon, CubeTransparentIcon } from "@heroicons/react/outline";
+import {
+  CubeIcon,
+  CubeTransparentIcon,
+  TableIcon,
+} from "@heroicons/react/outline";
 import { HomeIcon, InformationCircleIcon } from "@heroicons/react/solid";
 import Image from "next/image";
 import Link from "next/link";
@@ -8,28 +12,9 @@ import AccordionMenu from "./AccordionMenu";
 const SideBar = () => {
   const menuItem = [
     {
-      title: "Dashboard",
-      icon: <HomeIcon />,
-      element: [
-        {
-          name: "Dashboard",
-          path: "/",
-        },
-        {
-          name: "Project",
-          path: "/project",
-        },
-      ],
-    },
-    {
-      title: "Apps",
-      icon: <InformationCircleIcon />,
-      element: [
-        {
-          name: "Apps",
-          path: "/apps",
-        },
-      ],
+      title: "Customer",
+      icon: <TableIcon />,
+      path: "/customer-list",
     },
   ];
 
@@ -50,7 +35,7 @@ const SideBar = () => {
               <AccordionMenu
                 icon={item.icon}
                 title={item.title}
-                items={item.element}
+                path={item.path}
                 isClose={index === 0 || index === 3}
               />
             </div>

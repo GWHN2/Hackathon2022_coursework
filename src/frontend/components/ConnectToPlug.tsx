@@ -45,7 +45,7 @@ const ConnectToPlug = () => {
 
   console.log("balance", balance);
 
-  const handleClick = async () => {
+  const onBntConnectPlug = async () => {
     try {
       if (!isConnected) {
         const whitelist = [canisterId];
@@ -66,7 +66,7 @@ const ConnectToPlug = () => {
     <div
       className="p-1 cursor-pointer rounded-xl plug-gradient"
       onClick={() => {
-        handleClick();
+        onBntConnectPlug();
       }}
     >
       <div className="p-1 font-semibold bg-white rounded-lg">

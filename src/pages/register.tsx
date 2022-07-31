@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Button from "../frontend/components/common/Button";
 import TextInput from "../frontend/components/common/TextInput";
+import { makeHelloActor } from "../frontend/service/actor-locator";
 
 function RegisterPage() {
   const [firstName, setFirstName] = useState("");
@@ -8,34 +9,38 @@ function RegisterPage() {
   const [sex, setSex] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
+  const helloActor = makeHelloActor();
+  const [dateOfBirth, setDateOfBirth] = useState("");
 
-  const onFirstNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFirstName(e.target.value);
-  }
+  const onFirstNameChange = (e: string) => {
+    setFirstName(e);
+  };
 
-  const onLastNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setLastName(e.target.value);
-  }
+  const onLastNameChange = (e: string) => {
+    setLastName(e);
+  };
 
-  const onSexChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSex(e.target.value);
-  }
+  const onSexChange = (e: string) => {
+    setSex(e);
+  };
 
-  const onPhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPhone(e.target.value);
-  }
+  const onPhoneChange = (e: string) => {
+    setPhone(e);
+  };
 
-  const onAddressChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setAddress(e.target.value);
-  }
+  const onAddressChange = (e: string) => {
+    setAddress(e);
+  };
 
-  const onSave = () => {
+  const onSave = async () => {
+    const data = {
+      name: `${firstName} ${lastName}`,
+      birthday: "",
+    };
+    const result = await helloActor.create_account(data);
+  };
 
-  }
-
-  const onCancel = () => {
-
-  }
+  const onCancel = () => {};
 
   return (
     <div>
@@ -43,32 +48,37 @@ function RegisterPage() {
 
       <div className="block">
         <label htmlFor="firstName">First name</label>
-        <TextInput
-          placeholder="First name"
-          onChange={onFirstNameChange}
-        />
+        <TextInput placeholder="First name" onchange={onFirstNameChange} />
       </div>
 
       <div className="block">
         <label htmlFor="lastName">Last name</label>
-        <TextInput
-          placeholder="Last name"
-          onChange={onLastNameChange}
-        />
+        <TextInput placeholder="Last name" onchange={onLastNameChange} />
       </div>
 
       <div className="block">
         <label htmlFor="sex">Sex</label>
         <div className="inline-block">
-          <div className="form-check inline-block">
-            <input className="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
-            <label className="form-check-label inline-block text-gray-800" >
+          <div className="inline-block form-check">
+            <input
+              className="float-left w-4 h-4 mt-1 mr-2 align-top transition duration-200 bg-white bg-center bg-no-repeat bg-contain border border-gray-300 rounded-full appearance-none cursor-pointer form-check-input checked:bg-blue-600 checked:border-blue-600 focus:outline-none"
+              type="radio"
+              name="flexRadioDefault"
+              id="flexRadioDefault1"
+            />
+            <label className="inline-block text-gray-800 form-check-label">
               Male
             </label>
           </div>
-          <div className="form-check inline-block">
-            <input className="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked />
-            <label className="form-check-label inline-block text-gray-800" >
+          <div className="inline-block form-check">
+            <input
+              className="float-left w-4 h-4 mt-1 mr-2 align-top transition duration-200 bg-white bg-center bg-no-repeat bg-contain border border-gray-300 rounded-full appearance-none cursor-pointer form-check-input checked:bg-blue-600 checked:border-blue-600 focus:outline-none"
+              type="radio"
+              name="flexRadioDefault"
+              id="flexRadioDefault2"
+              checked
+            />
+            <label className="inline-block text-gray-800 form-check-label">
               Female
             </label>
           </div>
@@ -77,23 +87,24 @@ function RegisterPage() {
 
       <div className="block">
         <label htmlFor="dateOfBirth">Date of birth</label>
-
+        <input
+          value={dateOfBirth}
+          type="date"
+          id="dateOfBirth"
+          onChange={(e) => {
+            setDateOfBirth(e.target.value);
+          }}
+        />
       </div>
 
       <div className="block">
         <label htmlFor="phone">Phone</label>
-        <TextInput
-          placeholder="Phone"
-          onChange={onPhoneChange}
-        />
+        <TextInput placeholder="Phone" onchange={onPhoneChange} />
       </div>
 
       <div className="block">
         <label htmlFor="address">Address</label>
-        <TextInput
-          placeholder="Address"
-          onChange={onAddressChange}
-        />
+        <TextInput placeholder="Address" onchange={onAddressChange} />
       </div>
 
       <Button
@@ -107,8 +118,6 @@ function RegisterPage() {
         layoutClassName="w-auto"
         onClick={onCancel}
       ></Button>
-
-
     </div>
   );
 }

@@ -28,6 +28,11 @@ const SideBar = () => {
       icon: <PlusCircleIcon />,
       path: "/create-nft",
     },
+    {
+      title: "Register",
+      icon: <></>,
+      path: "/register",
+    },
   ];
 
   return (
